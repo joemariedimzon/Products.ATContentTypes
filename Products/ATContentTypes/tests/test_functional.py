@@ -8,7 +8,7 @@ FILES = [
     'uploading.txt',
     # traversal.txt registers the browser page "document_view", and this registration
     # stays active in different doctests, so we make sure to include it last.
-    'traversal.txt',
+    'traversal.txt', 'simple-editing.txt',
 ]
 
 from zope.testing import doctest

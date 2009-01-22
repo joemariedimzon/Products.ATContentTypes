@@ -1,0 +1,95 @@
+.. -*-doctest-*-
+
+===============
+Editing Content
+===============
+
+Open a browser and log in as a normal user.
+
+    >>> from Products.Five import testbrowser
+    >>> from Products.PloneTestCase import ptc
+    >>> browser = testbrowser.Browser()
+    >>> portal.error_log._ignored_exceptions = ()
+    >>> browser.handleErrors = False
+    >>> browser.open(portal.search.absolute_url())
+    >>> browser.getLink('Log in').click()
+    >>> browser.getControl(
+    ...     'Login Name').value = ptc.default_user
+    >>> browser.getControl(
+    ...     'Password').value = ptc.default_password
+    >>> browser.getControl('Log in').click()
+
+Open a page.  When rendering this page the object actions, workflow
+actions, and the workflow history do not need to be calculated.  As
+such that code shouldn't be run.
+
+    # XXX intrument code not to run
+
+    >>> browser.open(folder.absolute_url())
+
+On this page there is only an edit button and an add menu.
+
+    >>> browser.getControl('Edit')
+    <SubmitControl name='edit' type='submit'>
+    >>> browser.getLink('Add new')
+    <Link text='Add new\xe2\x80\xa6 \xe2\x96\xbc'
+    url='http://nohost/plone/Members/test_user_1_/folder_factories'>
+
+The object actions are not rendered on this page.
+
+    >>> browser.getLink('Sharing')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('History')
+    Traceback (most recent call last):
+    LinkNotFoundError
+    >>> browser.getLink('Advanced...')
+    Traceback (most recent call last):
+    LinkNotFoundError
+
+After selecting page from the add menu the browser lands at the edit
+form.  The edit form has save and cancel buttons at both the top and
+bottom.
+
+    >>> browser.getLink('Page').click()
+    >>> print browser.contents
+    <...
+    ...Save...
+    ...Cancel...
+    ...Save...
+    ...Cancel...
+
+The edit form has workflow menu at the bottom for the form above the
+save and cancel buttons.
+
+    >>> browser.getLink('Make private')
+    <Link text='Make private'
+    url='http://nohost/plone/Members/test_user_1_/portal_factory/Document/document.../content_status_modify?workflow_action=hide'>
+
+Save the new page.
+
+    >>> browser.getControl('Title').value = 'Foo Page Title'
+    >>> browser.getControl('Save', index=1).click()
+    >>> print browser.contents
+    <...
+    ...Changes saved...
+
+After the object has been added, visit the edit page.  The object
+actions *are* rendered on this page.
+
+    >>> browser.getControl('Edit').click()
+    >>> print browser.contents
+    <...
+    ...Sharing...
+    ...History...
+    ...Advanced...
+    ...Title...
+    >>> browser.getLink('Sharing')
+    <Link text='Sharing'
+    url='http://nohost/plone/Members/test_user_1_/foo-page-title/@@sharing'>
+    >>> browser.getLink('History')
+    <Link text='History'
+    url='http://nohost/plone/Members/test_user_1_/foo-page-title/versions_history_form'>
+    >>> browser.getLink('Advanced')
+    <Link text='State: Public draft \xe2\x96\xbc' url='http://nohost/plone/Members/test_user_1_/foo-page-title/content_status_history'>
+
