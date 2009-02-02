@@ -410,7 +410,8 @@ class ATTopic(ATCTFolder):
                 # - the date criteria is set to 'now' (0)
                 # - the end key is set
                 # TODO: clean the above stuff up before any commit to trunk the Only when:... pseudo code is definately not needed
-                if clear_start and criterion.meta_type in ['ATFriendlyDateCriteria'] and not criterion.value and key == 'end' and result.has_key('start'):
+                if clear_start and criterion.meta_type in ['ATFriendlyDateCriteria'] \
+                and not criterion.value and key == 'end' and result.has_key('start'):
                     del result['start']
                 result[key] = value
 
