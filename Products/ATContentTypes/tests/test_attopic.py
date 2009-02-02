@@ -245,6 +245,78 @@ class TestSiteATTopic(atcttestcase.ATCTTypeTestCase):
         self.assertEquals( len( query ), 1 )
         self.assertEquals( query['baz'], 'bam' )
 
+    def test_nested_friendly_date_criteria( self ):
+        """
+        The queries before adding fix for https://dev.plone.org/plone/ticket/8827
+        where subtopics should inhert start / end keys
+        topic query: {
+        'start': {'query': DateTime('2009/01/30 21:54:27.370 GMT+1'), 'range': 'min'}
+        }
+        subtopic query: {
+        'start': {'query': DateTime('2009/01/30 21:54:27.444 GMT+1'), 'range': 'min'},
+        'end': {'query': DateTime('2009/01/30 21:54:27.445 GMT+1'), 'range': 'max'}
+        }
+        ^^ the 'start' key in the subtopic query is odd and results in combination
+        with the 'end' key in zero results even if there is old/past items.
+        """
+        
+        # Add topic - future items
+        topic = self._ATCT
+        date_crit = topic.addCriterion('start', 'ATFriendlyDateCriteria')
+        date_crit.setValue(0)
+        date_crit.setDateRange('+') # This is irrelevant when the date is now
+        date_crit.setOperation('more')
+        
+        # Add subtopic - past items
+        self.setRoles(['Manager', 'Member'])
+        topic.addSubtopic( 'qux' )
+        self.setRoles(['Member'])
+        subtopic = topic.qux
+        date_crit = subtopic.addCriterion('end','ATFriendlyDateCriteria')
+        date_crit.setValue(0)
+        date_crit.setDateRange('-') # This is irrelevant when the date is now
+        date_crit.setOperation('less')
+        subtopic.setAcquireCriteria(True)
+        
+        # fetch the query
+        query = subtopic.buildQuery()
+        
+        self.failUnless(query['end'])
+        # query shouldn't have a start key https://dev.plone.org/plone/ticket/8827
+        self.failIf(query.has_key('start'))
+    
+    def test_nested_friendly_date_criteria_reverse( self ):
+        """
+        Lets have a test for the reverse situation
+        when the main topic lists past items and
+        the subtopics lists furture items.
+        """
+        
+        # Add topic - past items
+        topic = self._ATCT
+        date_crit = topic.addCriterion('end', 'ATFriendlyDateCriteria')
+        date_crit.setValue(0)
+        date_crit.setDateRange('+') # This is irrelevant when the date is now
+        date_crit.setOperation('less')
+        
+        # Add subtopic - future items
+        self.setRoles(['Manager', 'Member'])
+        topic.addSubtopic( 'qux' )
+        self.setRoles(['Member'])
+        subtopic = topic.qux
+        date_crit = subtopic.addCriterion('start','ATFriendlyDateCriteria')
+        date_crit.setValue(0)
+        date_crit.setDateRange('-') # This is irrelevant when the date is now
+        date_crit.setOperation('more')
+        subtopic.setAcquireCriteria(True)
+        
+        # fetch the query
+        query = subtopic.buildQuery()
+        
+        # this one can have both start and end
+        self.failUnless(query['start'])
+        self.failUnless(query['end'])
+
     def test_edit(self):
         new = self._ATCT
         editATCT(new)
