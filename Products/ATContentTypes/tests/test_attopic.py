@@ -283,7 +283,7 @@ class TestSiteATTopic(atcttestcase.ATCTTypeTestCase):
         
         self.failUnless(query['end'])
         # query shouldn't have a start key https://dev.plone.org/plone/ticket/8827
-        self.failIf(query.has_key('start'))
+        self.failIf(o)
     
     def test_nested_friendly_date_criteria_reverse( self ):
         """
