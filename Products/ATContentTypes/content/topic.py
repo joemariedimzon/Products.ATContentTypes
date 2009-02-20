@@ -404,17 +404,15 @@ class ATTopic(ATCTFolder):
                 # If a sub topic is set to acquire then the 'start' key have to 
                 # be deleted to get ATFriendlyDateCriteria to work properly (the 'end' key) -
                 # so the 'start' key should be deleted.
-                # Only when:
+                # But only when:
                 # - a subtopic with acquire enabled
                 # - its a ATFriendlyDateCriteria
                 # - the date criteria is set to 'now' (0)
                 # - the end key is set
-                # TODO: clean the above stuff up before any commit to trunk the Only when:... pseudo code is definately not needed
                 if clear_start and criterion.meta_type in ['ATFriendlyDateCriteria'] \
-                and not criterion.value and key == 'end' and result.has_key('start'):
+                and not criterion.value and key == 'end' and 'start' in result:
                     del result['start']
                 result[key] = value
-
         return result
 
     security.declareProtected(View, 'queryCatalog')

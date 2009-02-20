@@ -3,7 +3,7 @@
 
 * Subtopics shouldn't always acquire the 'start' query. Fixes 
   https://dev.plone.org/plone/ticket/8827 
-  [pelle_]
+  [pelle]
 
 * Made Flash files display inline since Flash 10 requires this.  Fixes
   http://dev.plone.org/plone/ticket/8624
