@@ -1,6 +1,9 @@
 2.0 unreleased
 ==============
 
+- Marked the Archetypes profile as a dependency of our default profile.
+  [hannosch]
+
 - Added our own GenericSetup extension profile consisting of all ATCT specific
   configuration.
   [hannosch]
