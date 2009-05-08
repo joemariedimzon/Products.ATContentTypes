@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+  <object name="ATContentTypes" meta_type="Filesystem Directory View"
+     directory="Products.ATContentTypes:skins/ATContentTypes" />
+  <object name="ATReferenceBrowserWidget" meta_type="Filesystem Directory View"
+     directory="Products.ATReferenceBrowserWidget:skins/ATReferenceBrowserWidget" />
+  <skin-path name="*">
+  <layer name="ATContentTypes" insert-after="custom" />
+  <layer name="ATReferenceBrowserWidget" insert-after="ATContentTypes" />
+ </skin-path>
+</object>

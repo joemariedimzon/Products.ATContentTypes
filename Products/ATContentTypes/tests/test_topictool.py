@@ -125,7 +125,7 @@ class TestTool(atcttestcase.ATCTSiteTestCase):
         init_indexes = list(t.getIndexes())
         unique_indexes = [i for i in indexes if i not in init_indexes]
         unique_indexes = unique_indexes + [i for i in init_indexes if i not in indexes]
-        self.failIf(unique_indexes)
+        self.assertEquals(unique_indexes, [])
 
     def test_change_catalog_index(self):
         t = self.tool
