@@ -14,13 +14,6 @@
       template="templates/folder_listing.pt"
       permission="zope2.View" />
 
-  <browser:menuItem
-      for="zope.container.interfaces.IContainer"
-      menu="plone_displayviews"
-      title="Standard View"
-      action="folder_listing"
-      />
-
   <!-- folder_summary_view -->
 
   <browser:page
@@ -30,13 +23,6 @@
       template="templates/folder_summary_view.pt"
       permission="zope2.View" />
 
-  <browser:menuItem
-      for="zope.container.interfaces.IContainer"
-      menu="plone_displayviews"
-      title="Summary view"
-      action="folder_summary_view"
-      />
-
   <!-- folder_tabular_view -->
 
   <browser:page
@@ -45,12 +31,5 @@
       name="folder_tabular_view"
       template="templates/folder_tabular_view.pt"
       permission="zope2.View" />
-
-  <browser:menuItem
-      for="zope.container.interfaces.IContainer"
-      menu="plone_displayviews"
-      title="Tabular View"
-      action="folder_tabular_view"
-      />
 
 </configure>

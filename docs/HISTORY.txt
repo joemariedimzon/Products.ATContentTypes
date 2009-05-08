@@ -1,6 +1,9 @@
 2.0 unreleased
 ==============
 
+- Removed the dependency on plone.app.contentmenu.
+  [hannosch]
+
 - Removed test only PluggableAuthService dependency.
   [hannosch]
 
