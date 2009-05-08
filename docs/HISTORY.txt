@@ -1,6 +1,9 @@
 2.0 unreleased
 ==============
 
+- Removed test only PluggableAuthService dependency.
+  [hannosch]
+
 - Marked the Archetypes profile as a dependency of our default profile.
   [hannosch]
 

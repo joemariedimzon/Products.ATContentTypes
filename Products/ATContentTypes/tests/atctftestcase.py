@@ -4,7 +4,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.PloneTestCase.setup import default_user
 from Products.PloneTestCase.setup import default_password
 from Products.PloneTestCase.setup import portal_owner
-from Products.PluggableAuthService.interfaces.plugins import IChallengePlugin
 
 from Products.ATContentTypes.config import HAS_LINGUA_PLONE
 
@@ -19,11 +18,6 @@ class IntegrationTestCase(atcttestcase.ATCTFunctionalSiteTestCase):
         self.folder_path = '/%s' % self.folder.absolute_url(1)
         self.basic_auth = '%s:%s' % (default_user, default_password)
         self.owner_auth = '%s:%s' % (portal_owner, default_password)
-
-        # We want 401 responses, not redirects to a login page
-        plugins = self.portal.acl_users.plugins
-        for id in plugins.listPluginIds(IChallengePlugin):
-            plugins.deactivatePlugin(IChallengePlugin, id)
 
         # disable portal_factory as it's a nuisance here
         self.portal.portal_factory.manage_setPortalFactoryTypes(listOfTypeIds=[])
