@@ -38,7 +38,7 @@ Creating an AT object will a couple of events:
    (<ATDocument at /.../Members/test_user_1_/a>,
     <Products.DCWorkflow.events.AfterTransitionEvent object at ...>),
    (<ATDocument at /.../Members/test_user_1_/a>,
-    <zope.container.contained.ObjectAddedEvent object at ...>),
+    <zope.lifecycleevent.ObjectAddedEvent object at ...>),
    (<ATFolder at /.../Members/test_user_1_>,
     <zope.container.contained.ContainerModifiedEvent object at ...>),
    (<ATDocument at /.../Members/test_user_1_/a>,
@@ -46,7 +46,7 @@ Creating an AT object will a couple of events:
    (<ATDocument at /.../Members/test_user_1_/a>,
     <zope.lifecycleevent.ObjectCreatedEvent object at ...>),
    (<ATDocument at /.../Members/test_user_1_/a>,
-    <zope.container.contained.ObjectAddedEvent object at ...>),
+    <zope.lifecycleevent.ObjectAddedEvent object at ...>),
    (<ATFolder at /.../Members/test_user_1_>,
     <zope.container.contained.ContainerModifiedEvent object at ...>)]
 
