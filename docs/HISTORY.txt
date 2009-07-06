@@ -281,7 +281,7 @@
   [witsch]
 
 - Add view for rendering events as an iCal feed as proposed by PLIP 246,
-  http://plone.org/products/plone/roadmap/241.
+  http://plone.org/products/plone/roadmap/246.
   [witsch]
 
 - Remove all code related to auto-sorting / auto-ordering folder as proposed
