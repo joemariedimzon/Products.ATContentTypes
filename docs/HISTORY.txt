@@ -165,10 +165,6 @@
 - Removed references to external editor in comments.
   [hannosch]
 
-- Forward-port fix for http://dev.plone.org/plone/ticket/8336: already 
-  quoted characters in a "Link" url should not be quoted again on edit. 
-  [witsch] 
-
 - Removed empty test_getobjpositioninparent test from the base test case.
   [hannosch]
 
@@ -181,11 +177,6 @@
 
 - Fixed duplicate link icon in the custom topic view. This closes
   http://dev.plone.org/plone/ticket/6049.
-  [hannosch]
-
-- Fixed invalid field condition that prevented you from being able to edit
-  the "Inherit Criteria" value on a collection once it had been created.
-  This closes http://dev.plone.org/plone/ticket/6527.
   [hannosch]
 
 - Removed confusing behavior of ATEvent mixing eventType and Subject.
@@ -267,20 +258,47 @@
 - Fix XHTML error in criterion_edit_form.cpt
   [davisagli]
 
-1.2.8 - unreleased
+1.3.2 2009-05-20
+================
+
+- Added proper multi-lingual handling to the reference criterion. It should
+  only show referenced content in the same or the neutral language if the
+  uid catalog is language aware.
+  [hannosch]
+
+1.3.1 2009-04-28
+================
+
+- Made it possible to set an empty value to a topic text field. This closes
+  http://dev.plone.org/plone/ticket/7324.
+  [dunlapm]
+
+1.3.0 - 2009-03-11
 ==================
 
-* Made the relative path criterion less prone for funky Acquisition chains.
+- Add support for generating iCal feeds for topics.
+  This refs http://plone.org/products/plone/roadmap/246.
+  [witsch]
+
+- Add view for rendering events as an iCal feed as proposed by PLIP 246,
+  http://plone.org/products/plone/roadmap/241.
+  [witsch]
+
+- Remove all code related to auto-sorting / auto-ordering folder as proposed
+  by PLIP 241, http://plone.org/products/plone/roadmap/241.
+  [witsch]
+
+- Made the relative path criterion less prone for funky Acquisition chains.
   This refs http://dev.plone.org/plone/ticket/7686.
   [hannosch]
 
 1.2.7 - 2009-01-30
 ==================
 
-* Don't assume regular (non-btree) folders for next/previous support.
+- Don't assume regular (non-btree) folders for next/previous support.
   [witsch]
 
-* Made Flash files display inline since Flash 10 requires this.  Fixes
+- Made Flash files display inline since Flash 10 requires this.  Fixes
   http://dev.plone.org/plone/ticket/8624
   [alecm]
 
@@ -294,6 +312,10 @@
 - Avoid acquiring getText from parent objects in atct_album_view. This refs
   http://dev.plone.org/plone/ticket/8190.
 
+- Already quoted characters in a "Link" url should not be quoted again
+  on edit. This closes http://dev.plone.org/plone/ticket/8336.
+  [witsch]
+
 - Removed parameters that has to be controlled through CSS from 
   atct_topic_view.pt. This closes http://dev.plone.org/plone/ticket/6803
   [spliter]
@@ -301,6 +323,11 @@
 - Made it possible to set an empty value to a document text field.  This closes
   http://dev.plone.org/plone/ticket/7324.
   [davisagli]
+
+- Fixed invalid field condition that prevented you from being able to edit
+  the "Inherit Criteria" value on a collection once it had been created.
+  This closes https://dev.plone.org/plone/ticket/6527.
+  [hannosch]
 
 - Changed a msgid for the url field of events to have a distinct value.
   This closes http://dev.plone.org/plone/ticket/8197.
