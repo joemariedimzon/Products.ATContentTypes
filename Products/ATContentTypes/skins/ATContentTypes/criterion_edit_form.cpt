@@ -236,7 +236,6 @@ $(function() {
                 <select name="field"
                         id="sortfield"
                         tal:define="fields context/listSortFields">
-
                      <option value="no_sort"
                              tal:attributes="selected python:not context.hasSortCriterion();"
                              i18n:translate="no_sort_order">No sort order</option>

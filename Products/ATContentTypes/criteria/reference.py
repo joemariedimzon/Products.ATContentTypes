@@ -28,7 +28,14 @@ class ATReferenceCriterion(ATSelectionCriterion):
         putils = getToolByName(self, 'plone_utils')
         options = catalog.uniqueValuesFor(self.Field())
 
-        brains = uid_cat(UID=options, sort_on='Title')
+        # If the uid catalog has a Language index restrict the query by it.
+        # We should only shows references to items in the same or the neutral
+        # language.
+        query = dict(UID=options, sort_on='Title')
+        if 'Language' in uid_cat.indexes():
+            query['Language'] = [self.Language(), '']
+
+        brains = uid_cat(**query)
         display = []
         for b in brains:
             title_or_id = b.Title or b.id
