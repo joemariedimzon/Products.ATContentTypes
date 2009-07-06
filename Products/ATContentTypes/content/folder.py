@@ -7,16 +7,12 @@ from Products.ATContentTypes.config import PROJECTNAME
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.base import ATCTOrderedFolder
 from Products.ATContentTypes.content.base import ATCTBTreeFolder
-from Products.ATContentTypes.interfaces import IATFolder as z2IATFolder
-from Products.ATContentTypes.interfaces import IATBTreeFolder as z2IATBTreeFolder
 from Products.ATContentTypes.interface import IATFolder
 from Products.ATContentTypes.interface import IATBTreeFolder
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.ATContentTypes.content.schemata import NextPreviousAwareSchema
 from Products.ATContentTypes.content.schemata import finalizeATCTSchema
 from Products.ATContentTypes.lib.constraintypes import ConstrainTypesMixinSchema
-
-from Products.ATContentTypes import ATCTMessageFactory as _
 
 from Products.CMFCore.permissions import View
 
@@ -58,8 +54,8 @@ class ATFolder(ATCTOrderedFolder):
         else:
             return False
 
-
 registerATCT(ATFolder, PROJECTNAME)
+
 
 class ATBTreeFolder(ATCTBTreeFolder):
     """A folder suitable for holding a very large number of items"""

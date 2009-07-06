@@ -31,4 +31,12 @@
       template="templates/folder_listing.pt"
       permission="zope2.View" />
 
+
+  <browser:page
+      for="Products.ATContentTypes.interfaces.topic.IATTopic"
+      name="ics_view"
+      class=".calendar.TopicCalendarView"
+      permission="zope2.View"
+      />
+
 </configure>

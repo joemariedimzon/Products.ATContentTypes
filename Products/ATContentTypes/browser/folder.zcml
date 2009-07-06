@@ -32,4 +32,18 @@
       template="templates/folder_tabular_view.pt"
       permission="zope2.View" />
 
+  <browser:page
+      for="Products.ATContentTypes.interfaces.folder.IATFolder"
+      name="ics_view"
+      class=".calendar.CalendarView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
+      name="ics_view"
+      class=".calendar.CalendarView"
+      permission="zope2.View"
+      />
+
 </configure>

@@ -255,7 +255,7 @@
   of 'http://nohost/plone/login_form', because the latter incorrectly
   redirected to 'http://nohost/plone/localhost'
   [sirgarr]
-   
+
 1.3.3 unreleased
 ================
 
@@ -267,7 +267,24 @@
 - Fix XHTML error in criterion_edit_form.cpt
   [davisagli]
 
-1.2.6
+1.2.8 - unreleased
+==================
+
+* Made the relative path criterion less prone for funky Acquisition chains.
+  This refs http://dev.plone.org/plone/ticket/7686.
+  [hannosch]
+
+1.2.7 - 2009-01-30
+==================
+
+* Don't assume regular (non-btree) folders for next/previous support.
+  [witsch]
+
+* Made Flash files display inline since Flash 10 requires this.  Fixes
+  http://dev.plone.org/plone/ticket/8624
+  [alecm]
+
+1.2.6 - 2008-10-06
 ==================
 
 - Fixed the tidy validation which errored out and rasied the wrong error.
@@ -297,8 +314,8 @@
   collection does not have any results. This closes
   http://dev.plone.org/plone/ticket/8270.
   [dunlapm]
-   
-1.2.5 2008-04-22
+
+1.2.5 - 2008-04-22
 ==================
 
 - Remove leading whitespace in hrefs.
@@ -308,7 +325,7 @@
   http://dev.plone.org/plone/ticket/7517.
   [hannosch]
 
-1.2.4 2008-01-03
+1.2.4 - 2008-01-03
 ==================
 
 - The edit tab in ZMI should not be displayed for ATImage/ATFIle objects.
@@ -323,7 +340,7 @@
   disabled because the test browser does not translate pages
   [sirgarr]
 
-1.2.3 2007-12-02
+1.2.3 - 2007-12-02
 ==================
 
 - Fixed http://dev.plone.org/plone/ticket/7102: uploading xhtml
@@ -350,7 +367,7 @@
   being initialized. This fixes http://dev.plone.org/plone/ticket/7221
   [deo]
 
-1.2.2 2007-10-05
+1.2.2 - 2007-10-05
 ==================
 
 - Fix ATLink XSS issue.
@@ -1104,13 +1121,13 @@
   [tiran]
 
 - Optimized getRawRelatedItems index addition. There is no need to reindex
-  the *whole- catalog when adding a *single- index.
+  the whole catalog when adding a single index.
   [tiran]
 
-- Made the 'view' method aliases point to '(selected layout)' instead of
-  '(default view)'. This assures consistency with previous behaviour,
-  so that /view at the end of a URL always gets the item itself, ignoring
-  any default-page that may be set. Note that the 'view' *action- still
+- Made the view method aliases point to `selected layout` instead of
+  `default view`. This assures consistency with previous behavior,
+  so that `/view` at the end of a URL always gets the item itself, ignoring
+  any default-page that may be set. Note that the 'view' action still
   points to 'string:${object_url}', so that the 'view' tab, as well as
   the '(Default)' target, still get '(dynamic view)' (and thus default
   pages) for types other than File and Image.
