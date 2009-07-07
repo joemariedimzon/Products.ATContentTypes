@@ -1,13 +1,10 @@
-2.0 unreleased
+3.0 unreleased
 ==============
 
 - Use correct location for IObjectEvent.
   [hannosch]
 
 - Removed the dependency on plone.app.contentmenu.
-  [hannosch]
-
-- Removed test only PluggableAuthService dependency.
   [hannosch]
 
 - Marked the Archetypes profile as a dependency of our default profile.
@@ -17,18 +14,8 @@
   configuration.
   [hannosch]
 
-- Moved content type specific GenericSetup related functionality from CMFPlone
-  into this package.
-  [hannosch]
-
 - "Categories" are now "Tags", in line with common usage and terminology. 
   [limi]
-
-- Drop the dependency on simplejson. It's integrated into Python 2.6 as json.
-  [hannosch]
-
-- Avoid acquiring `portal_properties` and call it via a proper API.
-  [hannosch]
 
 - Turned the remaining useful listing views into browser resources. The album
   view is gone, since there are many add-ons available solving this use-case
@@ -57,9 +44,6 @@
 - Reverted the use of the pretty_title_or_id Python script.
   [hannosch]
 
-- Changed objectIds and objectValues calls to use the IContainer API.
-  [hannosch]
-
 - Use Batch from its new location plone.sequencebatch. We don't have a direct
   CMFPlone dependency anymore.
   [hannosch]
@@ -71,6 +55,47 @@
   [hannosch]
 
 - Removed inline-editing markup from default view templates.
+  [hannosch]
+
+- Merged change r24257 from 3.2 branch of the event.pt view to use the new
+  time_only prop so it gets correct localization of the times.  Closes
+  http://dev.plone.org/plone/ticket/8607
+  [jnelson, calvinhp]
+
+- Adjusted subtopics listing to use the is_expired method from the context
+  view instead of the former Python script.
+  [hannosch]
+
+- Moved default views for non-folderish content types to browser pages.
+  [hannosch]
+
+- Moved default public pages for all our content types over from CMFPlone.
+  [hannosch]
+
+- Removed the unmaintained atcontentypes.conf support.
+  [hannosch]
+
+- Adjusted tests to new Archetypes policy on return values.
+  [hannosch]
+
+
+2.0 unreleased
+==============
+
+- Removed test only PluggableAuthService dependency.
+  [hannosch]
+
+- Moved content type specific GenericSetup related functionality from CMFPlone
+  into this package.
+  [hannosch]
+
+- Drop the dependency on simplejson. It's integrated into Python 2.6 as json.
+  [hannosch]
+
+- Avoid acquiring `portal_properties` and call it via a proper API.
+  [hannosch]
+
+- Changed objectIds and objectValues calls to use the IContainer API.
   [hannosch]
 
 - Don't assume regular (non-btree) folders for next/previous support.
@@ -87,25 +112,10 @@
   of Globals.
   [hannosch]
 
-- Merged change r24257 from 3.2 branch of the event.pt view to use the new
-  time_only prop so it gets correct localization of the times.  Closes
-  http://dev.plone.org/plone/ticket/8607
-  [jnelson, calvinhp]
-
 - Changed parameter name at script getXMLSelectVocab.py from 'method' to 
   'vocab_method' to avoid getting overridden from ZPublisher.HTTPRequest.
   This closes http://dev.plone.org/plone/ticket/6960.
   [igbun]
-
-- Adjusted subtopics listing to use the is_expired method from the context
-  view instead of the former Python script.
-  [hannosch]
-
-- Moved default views for non-folderish content types to browser pages.
-  [hannosch]
-
-- Moved default public pages for all our content types over from CMFPlone.
-  [hannosch]
 
 - Changed description label to summary for page and news item. This closes
   http://dev.plone.org/plone/ticket/8700.
@@ -120,9 +130,6 @@
 
 - Removed icalendar package from the thirdparty folder. We don't use it
   ourselves and it's easy installable nowadays for anyone who wants it.
-  [hannosch]
-
-- Removed the unmaintained atcontentypes.conf support.
   [hannosch]
 
 - Removed never fully implemented autosort and urlupload modules.
@@ -225,9 +232,6 @@
 - Moved interface declarations from ZCML to the classes themselves.
   [hannosch]
 
-- Adjusted tests to new Archetypes policy on return values.
-  [hannosch]
-
 - Ported editing.txt, events.txt, reindex_sanity.txt and traversal.txt tests
   from Archetypes and adjusted them for the ATContentTypes specific behavior.
   [hannosch]
@@ -246,6 +250,7 @@
   of 'http://nohost/plone/login_form', because the latter incorrectly
   redirected to 'http://nohost/plone/localhost'
   [sirgarr]
+
 
 1.3.3 unreleased
 ================
