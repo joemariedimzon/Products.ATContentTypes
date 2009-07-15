@@ -6,7 +6,7 @@ from zope.interface import classImplements
 from zope.publisher.browser import TestRequest
 
 from Products.ATContentTypes.browser.calendar import cachekey
-from Products.ATContentTypes.interface.interfaces import ICalendarSupport
+from Products.ATContentTypes.interfaces import ICalendarSupport
 from Products.ATContentTypes.tests.atcttestcase import ATCTSiteTestCase
 
 

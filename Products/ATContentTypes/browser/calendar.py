@@ -3,7 +3,7 @@ from zope.publisher.browser import BrowserView
 
 from Products.CMFCore.utils import getToolByName
 
-from Products.ATContentTypes.interface.interfaces import ICalendarSupport
+from Products.ATContentTypes.interfaces import ICalendarSupport
 from Products.ATContentTypes.lib import calendarsupport as cs
 
 
