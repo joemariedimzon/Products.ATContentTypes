@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from unittest import defaultTestLoader
 
 from zope.annotation.interfaces import IAttributeAnnotatable
