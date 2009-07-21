@@ -121,26 +121,27 @@ class EventCalendarTests(ATCTSiteTestCase):
             'BEGIN:VEVENT',
             'BEGIN:VEVENT',
             'END:VCALENDAR')
-        # another folder should have another name, even though the set
-        # of events might be the same...
+        # another folder should have another name
+        self.folder.invokeFactory('Folder', 'folder2')
+        folder2 = self.folder['folder2']
+        folder2.processForm(values={'title': 'Folder2', 'description': 'Baz'})
         headers, output, request = makeResponse(TestRequest())
-        view = getMultiAdapter((self.portal, request), name='ics_view')
+        view = getMultiAdapter((folder2, request), name='ics_view')
         view.render()
         self.checkOrder(''.join(output),
             'BEGIN:VCALENDAR',
-            'X-WR-CALNAME:Plone site',
-            'X-WR-CALDESC:',
-            'BEGIN:VEVENT',
-            'BEGIN:VEVENT',
+            'X-WR-CALNAME:Folder2',
+            'X-WR-CALDESC:Baz',
             'END:VCALENDAR')
         # changing the title should be immediately reflected...
-        self.folder.processForm(values={'title': 'Föö!!'})
+        unifoo = unicode('F\xc3\xb6\xc3\xb6!!', 'utf-8')
+        self.folder.processForm(values={'title': unifoo})
         headers, output, request = makeResponse(TestRequest())
         view = getMultiAdapter((self.folder, request), name='ics_view')
         view.render()
         self.checkOrder(''.join(output),
             'BEGIN:VCALENDAR',
-            'X-WR-CALNAME:Föö!!',
+            'X-WR-CALNAME:%s' % unifoo,
             'X-WR-CALDESC:Bar',
             'BEGIN:VEVENT',
             'BEGIN:VEVENT',
