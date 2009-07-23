@@ -22,8 +22,6 @@ setup(name='Products.ATContentTypes',
       zip_safe=False,
       extras_require=dict(
         test=[
-            'zope.app.container',
-            'zope.app.testing',
             'Products.PloneTestCase',
         ]
       ),

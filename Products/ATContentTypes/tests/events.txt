@@ -7,11 +7,10 @@ handler that listens for object events for `IBaseObject`:
 
   >>> from pprint import pprint
   >>> from StringIO import StringIO
-  >>> from zope.app.testing import ztapi
   >>> from Products.Archetypes.tests.utils import makeContent, aputrequest
   >>> from Products.Archetypes.interfaces import IBaseObject
+  >>> from zope.component import getGlobalSiteManager
   >>> from zope.component.interfaces import IObjectEvent
-
 
   >>> class Handler:
   ...     def __init__(self):
@@ -23,7 +22,8 @@ handler that listens for object events for `IBaseObject`:
   ...         pprint(self.got)
   ...         self.got = []
   >>> handler = Handler()
-  >>> ztapi.subscribe([IBaseObject, IObjectEvent], None, handler)
+  >>> gsm = getGlobalSiteManager()
+  >>> gsm.registerHandler(handler, [IBaseObject, IObjectEvent], event=False)
 
 Creating an AT object will a couple of events:
 

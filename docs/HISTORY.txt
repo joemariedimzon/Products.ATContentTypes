@@ -1,6 +1,9 @@
 3.0 unreleased
 ==============
 
+- Removed last zope.app dependencies.
+  [hannosch]
+
 - Use correct location for IObjectEvent.
   [hannosch]
 
