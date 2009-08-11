@@ -101,6 +101,10 @@ class ATFile(ATCTFileContent):
         """
         self._setATCTFileContent(value, **kwargs)
 
+    def _should_set_id_to_filename(self, clean_filename):
+        """If the filename changed, say that we should set my ID to it."""
+        return clean_filename != self.getId()
+
     def __str__(self):
         """cmf compatibility
         """
