@@ -1,22 +1,20 @@
+from cStringIO import StringIO
 import os
 import transaction
 
-from Testing import ZopeTestCase # side effect import. leave it here.
-from Products.ATContentTypes.tests import atcttestcase, atctftestcase
-
-from cStringIO import StringIO
 from OFS.Image import Image as OFSImage
-
 from Products.CMFCore.permissions import View
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.Archetypes.interfaces.layer import ILayerContainer
 from Products.Archetypes.atapi import *
-from Products.ATContentTypes.tests.utils import dcEdit, PACKAGE_HOME
-
 from Products.ATContentTypes.content.image import ATImage
 from Products.ATContentTypes.interfaces import IImageContent
 from Products.ATContentTypes.interfaces import IATImage
-
+from Products.ATContentTypes.tests import atcttestcase, atctftestcase
+from Products.ATContentTypes.tests.utils import dcEdit, PACKAGE_HOME
+from Products.Five.testbrowser import Browser
+from Products.PloneTestCase.PloneTestCase import FunctionalTestCase, setupPloneSite
+from Testing import ZopeTestCase # side effect import. leave it here.
 from zope.interface.verify import verifyObject
 
 # third party extension
@@ -46,6 +44,52 @@ def editATCT(obj):
     dcEdit(obj)
 
 tests = []
+
+
+setupPloneSite()
+
+class TestATImageFunctional(FunctionalTestCase):
+    """Browsertests for ATImage"""
+    
+    def afterSetUp(self):
+        #super(TestATImageFunctional, self).afterSetUp()
+        self.userId = 'fred'
+        self.password = 'secret'
+        self.portal.acl_users.userFolderAddUser(self.userId, self.password, ['Manager'], [])
+        self.browser = Browser()
+        self._log_in()
+
+    def _log_in(self):
+        """Log in as someone who can add new Images."""
+        self.browser.open(self.portal.absolute_url())
+        self.browser.getLink('Log in').click()
+        self.browser.getControl('Login Name').value = self.userId
+        self.browser.getControl('Password').value = self.password
+        self.browser.getControl('Log in').click()
+
+    def _make_image(self, title):
+        """Add a new Image at the root of the Plone site."""
+        #browser.handleErrors = False
+        self.browser.open(self.portal.absolute_url() + '/createObject?type_name=Image')
+        self.browser.getControl('Title').value = title
+        image = self.browser.getControl(name='image_file')
+        image.filename = 'canoneye.jpg'
+        image.value = TEST_JPEG_FILE
+        self.browser.getControl('Save').click()
+
+    def test_image_id_computation(self):
+        """Assert image ID is computed from title when provided, from filename when not."""
+        # Get ID from filename:
+        self._make_image('')
+        self.failUnless('canoneye.jpg' in self.browser.url)
+        
+        # Get ID from title:
+        self._make_image('Wonderful Image')
+        self.failUnless('/wonderful-image' in self.browser.url)
+        # And as a side effect, this makes sure the ID validator doesn't overzealously deny our upload of something else called canoneye.jpg, even though we're not going to compute its ID from its filename.
+
+tests.append(TestATImageFunctional)
+
 
 class TestSiteATImage(atcttestcase.ATCTTypeTestCase):
 
