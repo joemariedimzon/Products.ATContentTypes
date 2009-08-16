@@ -74,6 +74,7 @@ class TestATImageFunctional(FunctionalTestCase):
         self.browser.getControl('Title').value = title
         image = self.browser.getControl(name='image_file')
         image.filename = 'canoneye.jpg'
+        TEST_JPEG_FILE.seek(0)
         image.value = TEST_JPEG_FILE
         self.browser.getControl('Save').click()
 
@@ -83,10 +84,12 @@ class TestATImageFunctional(FunctionalTestCase):
         self._make_image('')
         self.failUnless('canoneye.jpg' in self.browser.url)
         
-        # Get ID from title:
+        # Get ID from title.
+        # As a side effect, make sure the ID validator doesn't overzealously
+        # deny our upload of something else called canoneye.jpg, even though
+        # we're not going to compute its ID from its filename.
         self._make_image('Wonderful Image')
-        self.failUnless('/wonderful-image' in self.browser.url)
-        # And as a side effect, this makes sure the ID validator doesn't overzealously deny our upload of something else called canoneye.jpg, even though we're not going to compute its ID from its filename.
+        self.failUnless('/wonderful-image' in self.browser.url, msg="The expected URL snippet was not in " + self.browser.url)
 
 tests.append(TestATImageFunctional)
 

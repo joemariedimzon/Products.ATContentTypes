@@ -1,6 +1,10 @@
 2.0 unreleased
 ==============
 
+- Made ATImage compute its ID from its title if provided. Closes
+  http://dev.plone.org/old/plone/ticket/9186.
+  [erikrose]
+
 - Use correct location for IObjectEvent.
   [hannosch]
 
