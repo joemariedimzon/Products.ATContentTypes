@@ -337,7 +337,7 @@ class ATCTFileContent(ATCTContent):
                 # the user has disabled "short name editing".
                 pass
             elif clean_filename and \
-                 self._should_set_id_to_filename(clean_filename, self.Title()):
+                 self._should_set_id_to_filename(filename, self.Title()):
                 # If the user doesn't fill the Title field, Title() returns the
                 # uploaded file's name.
                 
@@ -351,8 +351,8 @@ class ATCTFileContent(ATCTContent):
             # it does if we don't setId() here).
 
     security.declarePrivate('_should_set_id_to_filename')
-    def _should_set_id_to_filename(self, clean_filename, title):
-        """Given the converted-to-ASCII name of the uploaded file and my title, return whether the filename should be used as my ID."""
+    def _should_set_id_to_filename(self, filename, title):
+        """Given the name of the uploaded file and my title, return whether the filename should be used as my ID."""
         raise NotImplementedError("_should_set_id_to_filename method must be"
                                   "implemented by subclasses.")
 
@@ -376,7 +376,7 @@ class ATCTFileContent(ATCTContent):
             # former method
             upload.seek(0)
 
-        if not used_id or not self._should_set_id_to_filename(clean_filename, REQUEST.form.get('title')):
+        if not used_id or not self._should_set_id_to_filename(filename, REQUEST.form.get('title')):
             # Set ID in whatever way the base classes usually do.
             return
 

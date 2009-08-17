@@ -1,3 +1,5 @@
+﻿# -*- coding: utf-8 -*-
+
 from cStringIO import StringIO
 import os
 import transaction
@@ -67,18 +69,18 @@ class TestATImageFunctional(FunctionalTestCase):
         self.browser.getControl('Password').value = self.password
         self.browser.getControl('Log in').click()
 
-    def _make_image(self, title):
+    def _make_image(self, title, filename='canoneye.jpg'):
         """Add a new Image at the root of the Plone site."""
         #browser.handleErrors = False
         self.browser.open(self.portal.absolute_url() + '/createObject?type_name=Image')
         self.browser.getControl('Title').value = title
         image = self.browser.getControl(name='image_file')
-        image.filename = 'canoneye.jpg'
+        image.filename = filename
         TEST_JPEG_FILE.seek(0)
         image.value = TEST_JPEG_FILE
         self.browser.getControl('Save').click()
 
-    def test_image_id_computation(self):
+    def test_image_id_from_filename_and_title(self):
         """Assert image ID is computed from title when provided, from filename when not."""
         # Get ID from filename:
         self._make_image('')
@@ -90,6 +92,11 @@ class TestATImageFunctional(FunctionalTestCase):
         # we're not going to compute its ID from its filename.
         self._make_image('Wonderful Image')
         self.failUnless('/wonderful-image' in self.browser.url, msg="The expected URL snippet was not in " + self.browser.url)
+
+    def test_image_id_from_unicode_title(self):
+        """Make sure a unicode filename doesn't throw off the should-I-take-my-ID-from-the-filename logic."""
+        self._make_image('', filename=u'Pictüre 1.png'.encode('utf-8'))
+        self.failUnless('Picture%201.png' in self.browser.url, msg="The expected URL snippet was not in " + self.browser.url)
 
 tests.append(TestATImageFunctional)
 

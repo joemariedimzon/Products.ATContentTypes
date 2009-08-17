@@ -98,9 +98,10 @@ class ATImage(ATCTFileContent, ATCTImageTransform):
         self.getEXIF(value, refresh=refresh_exif)
         self._setATCTFileContent(value, **kwargs)
     
-    def _should_set_id_to_filename(self, clean_filename, title):
+    def _should_set_id_to_filename(self, filename, title):
         """If title is blank, have the caller set my ID to the uploaded file's name."""
-        return clean_filename == title or not title
+        # When the title is blank, sometimes the filename is returned as the title.
+        return filename == title or not title
 
     security.declareProtected(View, 'tag')
     def tag(self, **kwargs):
