@@ -50,11 +50,11 @@ tests = []
 
 setupPloneSite()
 
-class TestATImageFunctional(FunctionalTestCase):
-    """Browsertests for ATImage"""
+class TestIDFromTitle(FunctionalTestCase):
+    """Browsertests to make sure ATImages derive their default IDs from their titles"""
+    # TODO: Merge into TestATImageFunctional, below.
     
     def afterSetUp(self):
-        #super(TestATImageFunctional, self).afterSetUp()
         self.userId = 'fred'
         self.password = 'secret'
         self.portal.acl_users.userFolderAddUser(self.userId, self.password, ['Manager'], [])
@@ -71,7 +71,6 @@ class TestATImageFunctional(FunctionalTestCase):
 
     def _make_image(self, title, filename='canoneye.jpg'):
         """Add a new Image at the root of the Plone site."""
-        #browser.handleErrors = False
         self.browser.open(self.portal.absolute_url() + '/createObject?type_name=Image')
         self.browser.getControl('Title').value = title
         image = self.browser.getControl(name='image_file')
@@ -98,7 +97,7 @@ class TestATImageFunctional(FunctionalTestCase):
         self._make_image('', filename=u'Pictüre 1.png'.encode('utf-8'))
         self.failUnless('Picture%201.png' in self.browser.url, msg="The expected URL snippet was not in " + self.browser.url)
 
-tests.append(TestATImageFunctional)
+tests.append(TestIDFromTitle)
 
 
 class TestSiteATImage(atcttestcase.ATCTTypeTestCase):
