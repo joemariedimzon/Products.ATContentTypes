@@ -352,9 +352,12 @@ class ATCTFileContent(ATCTContent):
 
     security.declarePrivate('_should_set_id_to_filename')
     def _should_set_id_to_filename(self, filename, title):
-        """Given the name of the uploaded file and my title, return whether the filename should be used as my ID."""
-        raise NotImplementedError("_should_set_id_to_filename method must be"
-                                  "implemented by subclasses.")
+        """Given the name of the uploaded file and my title, return whether the filename should be used as my ID.
+        
+        Default implementation: if the filename changed, say that we should set
+        my ID to it.
+        """
+        return filename != self.getId()
 
     security.declareProtected(View, 'post_validate')
     def post_validate(self, REQUEST=None, errors=None):
