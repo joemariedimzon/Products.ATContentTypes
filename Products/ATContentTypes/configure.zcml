@@ -8,6 +8,8 @@
   <include package=".exportimport" />
   <include file="profiles.zcml"/>
 
+  <include package="archetypes.referencebrowserwidget" />
+
   <five:deprecatedManageAddDelete
       class=".content.document.ATDocument" />
   <five:deprecatedManageAddDelete

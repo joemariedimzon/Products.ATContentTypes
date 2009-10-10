@@ -26,6 +26,7 @@ setup(name='Products.ATContentTypes',
         ]
       ),
       install_requires=[
+          'archetypes.referencebrowserwidget',
           'setuptools',
           'plone.i18n',
           'plone.memoize',
@@ -39,7 +40,7 @@ setup(name='Products.ATContentTypes',
           'zope.publisher',
           'zope.tal',
           'Products.Archetypes',
-          'Products.ATReferenceBrowserWidget',
+          'Products.ATReferenceBrowserWidget', # BBB
           'Products.CMFCore',
           'Products.CMFDynamicViewFTI',
           'Products.CMFDefault',
