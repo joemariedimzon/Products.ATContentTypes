@@ -29,8 +29,6 @@ from Products.validation.config import validation
 from Products.validation.validators.SupplValidators import MaxSizeValidator
 from Products.validation import V_REQUIRED
 
-import transaction
-
 validation.register(MaxSizeValidator('checkImageMaxSize',
                                      maxsize=zconf.ATImage.max_file_size))
 
