@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '1.3.7'
+version = '1.3.7-or'
 
 setup(name='Products.ATContentTypes',
       version=version,
@@ -24,6 +24,7 @@ setup(name='Products.ATContentTypes',
           'setuptools',
           'Products.CMFCore',
           'Products.Archetypes',
+          'Products.OrderableReferenceField',
           'Plone',
           'Products.CMFDynamicViewFTI',
           'zope.interface',
