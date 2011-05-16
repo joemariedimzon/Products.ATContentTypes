@@ -33,6 +33,8 @@ from Products.CMFCore.permissions import ModifyPortalContent
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
+from Products.OrderableReferenceField import OrderableReferenceField, OrderableReferenceBrowserWidget
+
 # for ATContentTypes we want to have the description in the edit view
 # just like CMF
 ATContentTypeSchema = BaseSchema.copy() + MetadataSchema((
@@ -60,14 +62,14 @@ ATContentTypeSchema['description'].schemata = 'default'
 # BBB
 ATContentTypeBaseSchema = ATContentTypeSchema
 
-relatedItemsField = ReferenceField('relatedItems',
+relatedItemsField = OrderableReferenceField('relatedItems',
         relationship = 'relatesTo',
         multiValued = True,
         isMetadata = True,
         languageIndependent = False,
         index = 'KeywordIndex',
         write_permission = ModifyPortalContent,
-        widget = ReferenceBrowserWidget(
+        widget = OrderableReferenceBrowserWidget(
             allow_search = True,
             allow_browse = True,
             show_indexes = False,
